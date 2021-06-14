@@ -30,7 +30,7 @@ server.get('/weather',(req,res)=>{
             })
             let cast=new Forecast(citywither.date,citywither.description)
             arr.push(cast)
-            res.send({citywither,arr});
+            res.send({citywither});
             console.log(`listen on Port `)
         
         })

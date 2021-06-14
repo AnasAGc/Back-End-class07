@@ -1,31 +1,31 @@
 {
   "city":[
     { "city_name": "Amman",
-     "lon": 151.21,
+     "lon": 34.4289168,
      "timezone": "Australia/Sydney",
-     "lat": -33.87,
+     "lat": 31.5159996,
      "country_code": "AU",
      "state_code": "02",
      "date":"2021-07-1",
-     "description":"Low of 17.5, high of 29.9 with few clouds"
+     "description":"Overcast clouds"
    },
    { "city_name": "Paris",
-     "lon": 84.21,
+     "lon":2.3514616 ,
      "timezone": "Australia/Sydney",
-     "lat": -36.87,
+     "lat":48.8566969 ,
      "country_code": "AU",
      "state_code": "02",
      "date":"2021-05-1",
-     "description":"Low of 17.5, high of 29.9 with few clouds"
+     "description":"Thunderstorm with rain"
    },
    { "city_name": "Seattle",
-     "lon": 91.21,
+     "lon": -122.3300624,
      "timezone": "Australia/Sydney",
-     "lat": -47.87,
+     "lat": 47.6038321,
      "country_code": "AU",
      "state_code": "02",
      "date":"2021-04-1",
-     "description":"Low of 17.5, high of 29.9 with few clouds"
+     "description":"Clear Sky"
    }
      ]
 }
