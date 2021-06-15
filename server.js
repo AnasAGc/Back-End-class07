@@ -2,6 +2,7 @@ const cities=require('./data/city.json')
 const express=require('express');
 const cors=require('cors');
 const server=express();
+const axios = require('axios');
 require('dotenv').config();
 server.use(cors());
 
@@ -17,32 +18,41 @@ server.get('/',(req,res)=>{
 })
 
 
-//localhost:3010/getPoke?city=bulbasaur
+//localhost:3010/weatherForcast?city=bulbasaur
 
-server.get('/weather',(req,res)=>{
-        let couuntry=req.query.cityName
-        let lat=req.query.cityLat
-        let lon=req.query.cityLon
+https://api.weatherbit.io/v2.0/current?lat=31.5159996&lon=34.4289168&key=0ec2f4c1613941ed9eb3f9aba5c2cf26
 
-        let citywither=cities.city.find(item=>{
-                   if( item.lat == lat && item.lon==lon){
-                       return item;
-                   }
-            })
-            let cast=new Forecast(citywither.date,citywither.description)
-            arr.push(cast)
-            res.send({citywither});
-            console.log(`listen on Port `)
-        
+server.get('/weatherForcast',handleweather)
+
+function handleweather(req,res){
+    let weatherKey=process.env.WEATHER_API_KEY
+    let Latitude=req.query.cityLat
+    let Longitude=req.query.cityLon
+
+
+    let url=`https://api.weatherbit.io/v2.0/forecast/daily?lat=${Latitude}&lon=${Longitude }&key=${weatherKey}`
+    axios.get(url).then(apiWeather=>{
+        const weatherTemp= apiWeather.data.data.map((weather)=>{
+            return new Forcast(weather)
         })
+        res.send(weatherTemp);
+        console.log(weatherTemp);
+    })
+}
 
-        class Forecast {
-            constructor( date1, description1){
-                 this.date = date1;
-                 this.description= description1;
-            }
-        }
-        
+
+
+class Forcast{
+    constructor(item){
+
+        this.description=item.weather.description;
+        this.data=item.valid_date;
+        this.temp=item.high_temp;
+    }
+}
+
+
+
         
         server.get('*',(req,res)=>{
             res.status(404).send('Sorry This Page Not Found ')
