@@ -2,6 +2,7 @@ const cities=require('./data/city.json')
 const express=require('express');
 const cors=require('cors');
 const server=express();
+require('dotenv').config();
 server.use(cors());
 
 const arr=[]
