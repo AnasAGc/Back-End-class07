@@ -48,7 +48,7 @@ server.get('/weather',(req,res)=>{
             res.status(404).send('Sorry This Page Not Found ')
         })
         
-        const PORT=3002
+        const PORT=process.env.PORT || 3002
         server.listen(PORT,()=>{
             console.log(`listen on Port ${PORT}`)
         })
