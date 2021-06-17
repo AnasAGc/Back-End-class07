@@ -3,23 +3,38 @@ const axios = require("axios");
 
 module.exports=getMoviesHandler;
 
+let meMoemry={};
 function getMoviesHandler(req, res) {
+
   let cityName = req.query.cityName;
   let key = process.env.MOVIE_API_KEY;
   let url = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${cityName}&page=1`;
 
-  axios
-    .get(url)
-    .then((apiResult) => {
-      const movieArray = apiResult.data.results.map((item) => {
-        return new Movies(item);
-      });
-      res.send(movieArray);
-    })
+  if(meMoemry[cityName]!==undefined){
+    res.send(meMoemry[cityName]);
+    console.log('momery');
+  }else{
 
-    .catch((err) => {
-      res.send(`there is an error in getting the data => ${err}`);
-    });
+    axios
+      .get(url)
+      .then((apiResult) => {
+        const movieArray = apiResult.data.results.map((item) => {
+          return new Movies(item);
+        });
+        meMoemry[cityName]=movieArray;
+        console.log("Api");
+        res.send(movieArray);
+      })
+  
+      .catch((err) => {
+        res.send(`there is an error in getting the data => ${err}`);
+      });
+
+
+  }
+
+
+
 }
 
 class Movies {
